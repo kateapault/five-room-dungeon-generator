@@ -63,7 +63,7 @@ export const dungeonPurpose = [
     "Mine",
     "Vault",
     "Tower",
-    "Death trap",
+    "Death Trap",
 ]
 
 export const roomSizes = [    

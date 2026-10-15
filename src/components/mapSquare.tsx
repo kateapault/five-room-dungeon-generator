@@ -12,10 +12,17 @@ export default function MapSquare( {room, entrance, selected, onSelection} ) {
     let classNames = `square`
     room == 'spacer' ? classNames += ' spacer' : classNames += ' room'
     if (selected) classNames += ' selected'
+
+    function selectRoom() {
+        if (room == 'spacer') {
+            return
+        }
+        onSelection(room)
+    }
     
     return(
-        <div className={classNames} onClick={onSelection}>
-            {entrance ? 'E' : ''}
+        <div className={classNames} onClick={selectRoom}>
+            {entrance ? 'Entrance' : ''}
         </div>
     )
 }
