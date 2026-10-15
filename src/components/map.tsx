@@ -3,7 +3,7 @@ import MapSquare from "./mapSquare";
 import './components.css'
 
 export default function DungeonMap({ layout, selectedRoom, setSelectedRoom }) {
-    console.log(layout.pattern)
+    // console.log(layout.pattern)
 
     function onSelection(room: String) {
         if (room == 'spacer') {

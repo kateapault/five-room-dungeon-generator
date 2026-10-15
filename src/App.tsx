@@ -2,13 +2,19 @@ import React from 'react'
 import { useState } from 'react'
 import './App.css'
 import Page from './components/page'
+import { generateDungeon } from "./services/generator.ts"
 
 function App() {
   const [generatedDungeon, setGeneratedDungeon] = useState({})
-
-  function generateDungeon() {
-    setGeneratedDungeon({'dungeon': true})
+  // const [buttonClicked, setButtonClicked] = useState(false)
+  
+  function handleClick() {
+    let dungeon: Object = generateDungeon()
+    setGeneratedDungeon(dungeon)
+    // setButtonClicked(true)
   }
+  console.log(generatedDungeon)
+  // console.log('loadeddd')
 
   return (
     <>
@@ -18,9 +24,12 @@ function App() {
       <div className="main">
         {
           Object.keys(generatedDungeon).length > 0 ?
-          <Page />
+          // buttonClicked ?
+          <Page dungeon={generatedDungeon}/>
+          // <div>{`${generatedDungeon}`}</div>
+          // <div>placeholder</div>
           :
-          <button className="generate" onClick={generateDungeon}>Generate</button>
+          <button className="generate" onClick={() => handleClick()}>Generate</button>
         }
       </div>
     </>
