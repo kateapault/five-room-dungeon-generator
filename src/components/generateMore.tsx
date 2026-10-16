@@ -4,9 +4,10 @@ import { TempClueListItem, TempTreasureListItem } from "./listElements";
 
 export default function GenerateMore({ saveClue, saveTreasure=null, addCombat=null, addNpc=null }) {
     const [clues, setClues] = useState<string[]>([])
+    const [numClues, setNumClues] = useState(2)
 
     function handleGenerateClues() {
-        setClues(generateClues(2))
+        setClues(generateClues(numClues))
         console.log(clues)
     }
 
@@ -39,7 +40,18 @@ export default function GenerateMore({ saveClue, saveTreasure=null, addCombat=nu
                         )
                     })
                 }</div>
-                <button onClick={handleGenerateClues}>generate clues</button>
+                <div>
+                    <select
+                        value={numClues}
+                        onChange={e => setNumClues(+e.target.value)}
+                    >
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                    <button onClick={handleGenerateClues}>generate clues</button>
+                </div>
             </div>
             <div>
                 <button>generate treasure</button>
