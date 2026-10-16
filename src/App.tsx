@@ -6,29 +6,24 @@ import { generateDungeon } from "./services/generator.ts"
 
 function App() {
   const [generatedDungeon, setGeneratedDungeon] = useState({})
-  // const [buttonClicked, setButtonClicked] = useState(false)
-  
+
   function handleClick() {
     let dungeon: Object = generateDungeon()
     setGeneratedDungeon(dungeon)
-    // setButtonClicked(true)
   }
-  console.log(generatedDungeon)
 
   return (
     <>
       <div className="top-bar">
         Five Room Dungeon Generator
+        <span className="top-bar-kicker">roll a five-room crawl</span>
       </div>
       <div className="main">
         {
           Object.keys(generatedDungeon).length > 0 ?
-          // buttonClicked ?
           <Page dungeon={generatedDungeon}/>
-          // <div>{`${generatedDungeon}`}</div>
-          // <div>placeholder</div>
           :
-          <button className="generate" onClick={() => handleClick()}>Generate</button>
+          <button className="btn btn-primary generate" onClick={() => handleClick()}>Generate a dungeon</button>
         }
       </div>
     </>

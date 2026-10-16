@@ -1,32 +1,29 @@
-// technically the treasure & clue items could be combined into a generic one
-// but the NPC and enemy displays are going to be different so might as well have separate ones for treasure & clue as well to keep the pattern
-
 export function TempTreasureListItem({t, removeTreasure, saveTreasure}) {
-    return (<div className="temp-treasure-item">
-        <button onClick={removeTreasure}>X</button>
-        <div>{t}</div>
-        <button onClick={saveTreasure}>Add to room</button>
+    return (<div className="list-row temp-treasure-item">
+        <button className="btn btn-icon" onClick={removeTreasure}>X</button>
+        <div className="list-row-text">{t}</div>
+        <button className="btn btn-ghost" onClick={saveTreasure}>Add to room</button>
     </div>)
 }
 
 export function SavedTreasureListItem({t, deleteTreasure}) {
-    return (<div className="saved-treasure-item">
-        <button onClick={deleteTreasure}>X</button>
-        <div>{t}</div>
+    return (<div className="list-row saved-treasure-item">
+        <button className="btn btn-icon" onClick={deleteTreasure}>X</button>
+        <div className="list-row-text">{t}</div>
     </div>)
 }
 
 export function TempClueListItem({c, removeClue, saveClue}) {
-    return (<div className="temp-clue-item">
-        <button onClick={removeClue}>X</button>
-        <div>{c}</div>
-        <button onClick={saveClue}>Add to room</button>
+    return (<div className="list-row temp-clue-item">
+        <button className="btn btn-icon" onClick={removeClue}>X</button>
+        <div className="list-row-text">{c}</div>
+        <button className="btn btn-ghost" onClick={saveClue}>Add to room</button>
     </div>)
 }
 
 export function SavedClueListItem({c, deleteClue}) {
-    return (<div className="saved-clue-item">
-        <button onClick={deleteClue}>X</button>
-        <div>{c}</div>
+    return (<div className="list-row saved-clue-item">
+        <button className="btn btn-icon" onClick={deleteClue}>X</button>
+        <div className="list-row-text">{c}</div>
     </div>)
 }

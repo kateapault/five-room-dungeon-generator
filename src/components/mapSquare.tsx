@@ -9,7 +9,7 @@ type MapSquareProps = {
     onSelection: Function,
 }
 
-export default function MapSquare( {room, entrance, selected, onSelection} ) {
+export default function MapSquare( {room, entrance, selected, onSelection}: MapSquareProps ) {
     let classNames = `square`
     room == SPACER ? classNames += ' spacer' : classNames += ' room'
     if (selected) classNames += ' selected'
@@ -23,7 +23,8 @@ export default function MapSquare( {room, entrance, selected, onSelection} ) {
     
     return(
         <div className={classNames} onClick={selectRoom}>
-            {entrance ? 'Entrance' : ''}
+            {room != SPACER ? <span className="room-letter">{room}</span> : null}
+            {entrance ? <span className="entrance-label">Entrance</span> : null}
         </div>
     )
 }

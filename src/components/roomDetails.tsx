@@ -1,11 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
-import { generateKeywords } from '../services/generator.ts'
 import { SavedClueListItem, SavedTreasureListItem } from './listElements.tsx';
-import { CLUES, TREASURES, NPCS, ENEMIES} from "../constants/constants"
+import { CLUES, TREASURES } from "../constants/constants"
 
-export default function RoomDetails({ contents, extras, deleteThing, removeNpc, removeTreasure }) {
-    // const [keywords, setKeywords] = useState<string[]>([])
+export default function RoomDetails({ contents, extras, deleteThing }) {
     const [showHelpInfo, setShowHelpInfo] = useState(false)
 
     function toggleHelpInfo() {
@@ -21,9 +19,9 @@ export default function RoomDetails({ contents, extras, deleteThing, removeNpc, 
     }
 
     return(
-        <div className="room-details-section">
+        <div className="panel room-details-section">
             <div className="question-bar">
-                <button className="question-button" onClick={toggleHelpInfo}>{showHelpInfo ? 'X' : '?'}</button>
+                <button className="btn btn-icon question-button" onClick={toggleHelpInfo}>{showHelpInfo ? 'X' : '?'}</button>
             </div>
             {
                 showHelpInfo ?
@@ -40,12 +38,12 @@ export default function RoomDetails({ contents, extras, deleteThing, removeNpc, 
                 </div>
                 :
                 <div className="room-details">
-                    <div>{formatRoomSize(contents["dimensions"])}</div>
-                    <div>Room keyword: {contents["contents"]}</div>
-                    <div>Supporting keywords: {formatKeywords(contents["keywords"])}</div>
+                    <div className="room-meta">{formatRoomSize(contents["dimensions"])}</div>
+                    <div className="room-keyword">Room keyword: <span className="room-keyword-value">{contents["contents"]}</span></div>
+                    <div className="room-meta">Supporting keywords: {formatKeywords(contents["keywords"])}</div>
                     { extras["clues"].length > 0 ? 
-                        <div>
-                            <div>Clues</div>
+                        <div className="extras-block">
+                            <div className="label">Clues</div>
                             {
                                 extras["clues"].map(c => {
                                     return (
@@ -60,8 +58,8 @@ export default function RoomDetails({ contents, extras, deleteThing, removeNpc, 
                         </div> 
                     : <></>}
                     { extras["treasures"].length > 0 ? 
-                        <div>
-                            <div>Treasures</div>
+                        <div className="extras-block">
+                            <div className="label">Treasures</div>
                             {
                                 extras["treasures"].map(t => {
                                     return (

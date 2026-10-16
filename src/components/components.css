@@ -1,107 +1,164 @@
 .page {
-    display: flex;
-    /* flex-direction: column; */
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: space-evenly;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px 32px;
+  width: 100%;
+  align-items: start;
 }
 
 .dungeon-title {
-    width: 100%;
-    font-size: 36px;
-    padding-bottom: 16px;
-    /* text-align: left; */
+  grid-column: 1 / -1;
+  font-family: var(--heading);
+  font-size: 36px;
+  font-weight: 600;
+  color: var(--text-h);
+  line-height: 1.15;
 }
 
 .dungeon-map {
-    flex: 1;
-    /* border: 1px solid green; */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    max-width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  justify-self: center;
 }
 
 .room-details-section {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    /* align-items: center; */
-    /* justify-content: center; */
-    max-width: 50%;
-    /* border: 1px solid green; */
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 16px 18px;
 }
 
 .room-details {
-    /* border: 1px solid pink; */
-    flex: 10;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.room-meta {
+  color: var(--text);
+}
+
+.room-keyword {
+  color: var(--text-h);
+  font-size: 18px;
+}
+
+.room-keyword-value {
+  font-family: var(--heading);
+  font-weight: 600;
 }
 
 .help-info {
-    flex: 10;
-    display: flex;
-    justify-items: center;
-    align-items: center;
-    /* border: 1px solid purple; */
+  color: var(--text);
 }
 
 .question-bar {
-    /* justify-self: flex-start; */
-    margin-bottom: auto;
-    width: 100%;
-    /* border: 1px solid grey; */
-    display: flex;
-    justify-content: flex-end;
-}
-
-.question-button {
-    margin-left: 8px;
-    font-weight: bold;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 8px;
 }
 
 .map-row {
-    display: flex;
+  display: flex;
 }
 
 .square {
-    height: 100px;
-    width: 100px;
-    justify-content: center;
-    align-content: center;
-    font-size: 16px;
-    color: whitesmoke;
+  height: 76px;
+  width: 76px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--mono);
+  font-size: 18px;
+  color: var(--text-h);
 }
 
 .spacer {
-    padding: 2px;
+  background: transparent;
 }
 
 .room {
-    border: 2px solid whitesmoke;
+  border: 2px solid var(--text-h);
+  background: var(--surface);
+  cursor: pointer;
+}
+
+.room:hover {
+  background: var(--accent-bg);
 }
 
 .selected {
-    background-color: whitesmoke;
-    /* color: var(--accent-bg) */
-    color: black;
+  background: var(--selected);
+  border-color: var(--accent);
+  color: var(--text-h);
+}
+
+.room-letter {
+  line-height: 1;
+}
+
+.entrance-label {
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text);
 }
 
 .generate-more-block {
-    width: 100%;
-    border: 1px solid green;
-    display: flex;
-    justify-content: space-evenly;
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
 }
 
-.saved-clue-item {
-    display: flex;
+.generator-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  min-width: 0;
 }
 
-.temp-clue-item {
-    display: flex;
+.generator-results {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 8px;
+}
+
+.generator-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.list-row-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.extras-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+@media (max-width: 800px) {
+  .page,
+  .generate-more-block {
+    grid-template-columns: 1fr;
+  }
+
+  .dungeon-title {
+    font-size: 28px;
+  }
 }

@@ -67,8 +67,9 @@ export default function GenerateMore({ saveThing }) {
 
     return(
         <div className="generate-more-block">
-            <div>
-                <div>{
+            <div className="panel generator-column">
+                <div className="label">Clues</div>
+                <div className="generator-results">{
                     clues.map(c => {
                         return(
                             <TempClueListItem 
@@ -80,8 +81,9 @@ export default function GenerateMore({ saveThing }) {
                         )
                     })
                 }</div>
-                <div>
+                <div className="generator-controls">
                     <select
+                        className="select"
                         value={clueParams}
                         onChange={e => setClueParams(+e.target.value)}
                     >
@@ -90,11 +92,12 @@ export default function GenerateMore({ saveThing }) {
                         <option value="3">3</option>
                         <option value="4">4</option>
                     </select>
-                    <button onClick={() => handleGenerateThing(CLUES)}>generate clues</button>
+                    <button className="btn" onClick={() => handleGenerateThing(CLUES)}>generate clues</button>
                 </div>
             </div>
-            <div>
-                <div>
+            <div className="panel generator-column">
+                <div className="label">Treasure</div>
+                <div className="generator-results">
                     {
                         treasures.map(t => {return(
                             <TempTreasureListItem 
@@ -106,8 +109,9 @@ export default function GenerateMore({ saveThing }) {
                         )})
                     }
                 </div>
-                <div>
+                <div className="generator-controls">
                     <select
+                        className="select"
                         value={treasureParams['num']}
                         onChange={e => updateTreasureNum(+e.target.value)}
                     >
@@ -117,6 +121,7 @@ export default function GenerateMore({ saveThing }) {
                         <option value="4">4</option>
                     </select>
                     <select
+                        className="select"
                         value={treasureParams['type']}
                         onChange={e => updateTreasureType(e.target.value)}
                     >
@@ -127,6 +132,7 @@ export default function GenerateMore({ saveThing }) {
                         <option value={MAGICITEMS}>Magic Items</option>
                     </select>
                     <select
+                        className="select"
                         value={treasureParams['level']}
                         onChange={e => updateTreasureLevel(e.target.value)}
                     >
@@ -136,7 +142,7 @@ export default function GenerateMore({ saveThing }) {
                         <option value={VERYRARE}>Very Rare</option>
                         <option value={LEGENDARY}>Legendary</option>
                     </select>
-                    <button onClick={() => handleGenerateThing(TREASURES)}>generate treasure</button>
+                    <button className="btn" onClick={() => handleGenerateThing(TREASURES)}>generate treasure</button>
                 </div>
             </div>
             {/* <div>
