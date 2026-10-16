@@ -90,3 +90,18 @@
     /* color: var(--accent-bg) */
     color: black;
 }
+
+.generate-more-block {
+    width: 100%;
+    border: 1px solid green;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.saved-clue-item {
+    display: flex;
+}
+
+.temp-clue-item {
+    display: flex;
+}

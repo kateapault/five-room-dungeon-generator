@@ -1,8 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
 import { generateKeywords } from '../services/generator.ts'
+import { SavedClueListItem } from './listElements.tsx';
 
-export default function RoomDetails({ contents }) {
+export default function RoomDetails({ contents, extras, deleteClue, removeNpc, removeTreasure }) {
     // const [keywords, setKeywords] = useState<string[]>([])
     const [showHelpInfo, setShowHelpInfo] = useState(false)
 
@@ -25,6 +26,8 @@ export default function RoomDetails({ contents }) {
 
         return `A ${dimensions["size"]} room (${dimensions["width"]} x ${dimensions["length"]} blocks | ${dimensions["width"]*5}' x ${dimensions["length"]*5}')`
     }
+
+    console.log(extras)
 
     return(
         <div className="room-details-section">
@@ -49,10 +52,52 @@ export default function RoomDetails({ contents }) {
                     <div>{formatRoomSize(contents["dimensions"])}</div>
                     <div>Room keyword: {contents["contents"]}</div>
                     <div>Supporting keywords: {formatKeywords(contents["keywords"])}</div>
-                    { contents["treasure"].length > 0 ? <div>treasure placeholder</div> : <></>}
-                    { contents["npcs"].length > 0 ? <div>NPC placeholder</div> : <></>}
-                    { contents["clues"].length > 0 ? <div>clues placeholder</div> : <></>}
-                    { contents["enemies"].length > 0 ? <div>enemies placeholder</div> : <></>}
+                    { extras["clues"].length > 0 ? 
+                        <div>
+                            <div>Clues</div>
+                            {
+                                extras["clues"].map(c => {
+                                    return (
+                                        <SavedClueListItem
+                                            key={c}
+                                            c={c}
+                                            deleteClue={() => deleteClue(c)}
+                                        />
+                                    )
+                                })
+                            }
+                        </div> 
+                    : <></>}
+                    { extras["npcs"].length > 0 ? 
+                        <div>
+                            <div>npcs</div>
+                            {
+                                extras["npcs"].map(n => {
+                                    return (
+                                        <div key={n}>
+                                            {n}
+                                            <button onClick={() => removeNpc(n)}>X</button>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div> 
+                    : <></>}
+                    { extras["treasures"].length > 0 ? 
+                        <div>
+                            <div>treasures</div>
+                            {
+                                extras["treasures"].map(t => {
+                                    return (
+                                        <div key={t}>
+                                            {t}
+                                            <button onClick={() => removeTreasure(t)}>X</button>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div> 
+                    : <></>}
                 </div>
             }
         </div>

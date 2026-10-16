@@ -2,12 +2,36 @@ import { tsat1_keywords, tsat2_keywords } from "../constants/keywords"
 import { adjectives } from "../constants/adjectives"
 import { layouts } from "../constants/layouts"
 import { roomContents, dungeonPurpose, roomSizes } from "../constants/dungeonAspects"
+import { clues } from "../constants/clues"
 
 export function getRandInt(maxNonInclusive: number, startFromOne: boolean = false): number {
     if (startFromOne) {
         return Math.ceil(Math.random()*(maxNonInclusive+1))
     }
     return Math.floor(Math.random()*maxNonInclusive)
+}
+
+export function generateClues(num: number = 1): Array<string> {
+    let resultClues = [clues[getRandInt(clues.length)]]
+    console.log(resultClues)
+    if (num > 1) {
+        let i = 1
+        while (i < num) {
+            let nextClue = clues[getRandInt(clues.length)]
+            console.log(nextClue)
+            if (nextClue in resultClues) {
+                continue
+            }
+            resultClues.push(nextClue)
+            i++
+        }
+    }
+    console.log(resultClues)
+    return [...resultClues]
+}
+
+export function generateTreasures() {
+    
 }
 
 // useList=1 pulls from tsat_1, useList=2 pulls from tsat_2, anything else pulls from both

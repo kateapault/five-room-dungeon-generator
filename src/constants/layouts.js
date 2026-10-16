@@ -9,14 +9,14 @@ export const layouts = [
     {
         'entrance': 'A',
         'pattern': [
-            ['A', 'B', 'C', 'D']
+            ['A', 'B', 'C', 'D'],
             ['spacer', 'spacer', 'E', 'spacer'],
         ],
     },
     {
         'entrance': 'E',
         'pattern': [
-            ['A', 'B', 'C', 'D']
+            ['A', 'B', 'C', 'D'],
             ['spacer', 'E', 'spacer', 'spacer'],
         ],
     },
