@@ -1,12 +1,13 @@
 import React from "react";
 import MapSquare from "./mapSquare";
 import './components.css'
+import { SPACER } from '../constants/constants'
 
 export default function DungeonMap({ layout, selectedRoom, setSelectedRoom }) {
     // console.log(layout.pattern)
 
     function onSelection(room: String) {
-        if (room == 'spacer') {
+        if (room == SPACER) {
             setSelectedRoom("")
         } else {
             setSelectedRoom(room)

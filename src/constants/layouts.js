@@ -1,92 +1,94 @@
+import { SPACER } from './constants'
+
 export const layouts = [
     {
         'entrance': 'A',
         'pattern': [        
             ['A', 'B', 'C', 'D'],
-            ['spacer', 'spacer', 'spacer', 'E'],
+            [SPACER, SPACER, SPACER, 'E'],
         ],
     },
     {
         'entrance': 'A',
         'pattern': [
             ['A', 'B', 'C', 'D'],
-            ['spacer', 'spacer', 'E', 'spacer'],
+            [SPACER, SPACER, 'E', SPACER],
         ],
     },
     {
         'entrance': 'E',
         'pattern': [
             ['A', 'B', 'C', 'D'],
-            ['spacer', 'E', 'spacer', 'spacer'],
+            [SPACER, 'E', SPACER, SPACER],
         ],
     },
     {
         'entrance': 'A',
         'pattern': [
-            ['A', 'spacer', 'spacer'],
+            ['A', SPACER, SPACER],
             ['B', 'C', 'D'],
-            ['spacer', 'E', 'spacer'],
+            [SPACER, 'E', SPACER],
         ],
     },
     {
         'entrance': 'A',
         'pattern': [
-            ['spacer', 'A', 'spacer'],
+            [SPACER, 'A', SPACER],
             ['B', 'C', 'D'],
-            ['spacer', 'E', 'spacer'],
+            [SPACER, 'E', SPACER],
         ],
     },
     {
         'entrance': 'E',
         'pattern': [
-            ['spacer', 'spacer', 'A'],
+            [SPACER, SPACER, 'A'],
             ['B', 'C', 'D'],
-            ['spacer', 'E', 'spacer'],
+            [SPACER, 'E', SPACER],
         ],
     },
     {
         'entrance': 'A',
         'pattern': [
             ['A', 'B', 'C'],
-            ['D', 'spacer', 'spacer'],
-            ['E', 'spacer', 'spacer'],
+            ['D', SPACER, SPACER],
+            ['E', SPACER, SPACER],
         ],
     },
     {
         'entrance': 'A',
         'pattern': [
-            ['spacer', 'spacer', 'A', 'B'],
-            ['C', 'D', 'E', 'spacer'],
+            [SPACER, SPACER, 'A', 'B'],
+            ['C', 'D', 'E', SPACER],
         ],
     },
     {
         'entrance': 'C',
         'pattern': [
             ['A', 'B', 'C'],
-            ['D', 'E', 'spacer'],
+            ['D', 'E', SPACER],
         ],
     },
     {
         'entrance': 'C',
         'pattern': [
-            ['A', 'B', 'spacer', 'spacer'],
-            ['spacer', 'C', 'D', 'E'],
+            ['A', 'B', SPACER, SPACER],
+            [SPACER, 'C', 'D', 'E'],
         ],
     },
     {
         'entrance': 'B',
         'pattern': [
             ['A', 'B', 'C'],
-            ['spacer', 'D', 'spacer'],
-            ['spacer', 'E', 'spacer']
+            [SPACER, 'D', SPACER],
+            [SPACER, 'E', SPACER]
         ],
     },
     {
         'entrance': 'A',
         'pattern': [
-            ['spacer', 'spacer', 'A'],
+            [SPACER, SPACER, 'A'],
             ['B', 'C', 'D'],
-            ['E', 'spacer', 'spacer']
+            ['E', SPACER, SPACER]
         ],
     },
 ]

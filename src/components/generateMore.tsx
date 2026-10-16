@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { generateClues, generateTreasures } from "../services/generator";
+import { generateClues } from "../services/generator";
 import { TempClueListItem, TempTreasureListItem } from "./listElements";
+import { Treasure } from "../constants/treasure"
 
 export default function GenerateMore({ saveClue, saveTreasure=null, addCombat=null, addNpc=null }) {
     const [clues, setClues] = useState<string[]>([])
     const [numClues, setNumClues] = useState(2)
+    const [treasures, setTreasures] = useState<string[]>([])
 
     function handleGenerateClues() {
         setClues(generateClues(numClues))
@@ -22,7 +24,7 @@ export default function GenerateMore({ saveClue, saveTreasure=null, addCombat=nu
     }
 
     function handleGenerateTreasures() {
-
+        setTreasures(Treasure.generateTreasure())
     }
 
     return(
@@ -54,7 +56,8 @@ export default function GenerateMore({ saveClue, saveTreasure=null, addCombat=nu
                 </div>
             </div>
             <div>
-                <button>generate treasure</button>
+                <div>{treasures}</div>
+                <button onClick={handleGenerateTreasures}>generate treasure</button>
             </div>
             <div>
                 <button>generate combat encounter</button>

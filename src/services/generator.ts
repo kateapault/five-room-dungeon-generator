@@ -3,13 +3,7 @@ import { adjectives } from "../constants/adjectives"
 import { layouts } from "../constants/layouts"
 import { roomContents, dungeonPurpose, roomSizes } from "../constants/dungeonAspects"
 import { clues } from "../constants/clues"
-
-export function getRandInt(maxNonInclusive: number, startFromOne: boolean = false): number {
-    if (startFromOne) {
-        return Math.ceil(Math.random()*(maxNonInclusive+1))
-    }
-    return Math.floor(Math.random()*maxNonInclusive)
-}
+import { randomlySelectWeightedIndex, getRandInt } from "./helpers"
 
 export function generateClues(num: number = 1): Array<string> {
     let resultClues = [clues[getRandInt(clues.length)]]
@@ -28,10 +22,6 @@ export function generateClues(num: number = 1): Array<string> {
     }
     console.log(resultClues)
     return [...resultClues]
-}
-
-export function generateTreasures() {
-    
 }
 
 // useList=1 pulls from tsat_1, useList=2 pulls from tsat_2, anything else pulls from both
@@ -63,19 +53,7 @@ function generateDungeonTitle(): string {
 
 function generateRoomSize(): Object {
     let weights = roomSizes.map(rs => rs.weight)
-    const cumulativeSum = (sum => value => sum += value)(0);
-    let cumulativeWeights = weights.map(cumulativeSum)
-
-    let randInt = Math.random()
-    let ind = 0
-    while (ind < cumulativeWeights.length) {
-        console.log(`ind: ${ind} | cumulativeWeights[ind]: ${cumulativeWeights[ind]}`)
-        if (randInt <= cumulativeWeights[ind]) {
-            break;
-        }
-        ind ++  
-    }
-    let roomData = roomSizes[ind]
+    let roomData = roomSizes[randomlySelectWeightedIndex(weights)]
     let roomWidth = roomData["width_add"]
     for (let i = 0; i < roomData["width_num_rolls"]; i++) {
         roomWidth += getRandInt(roomData["width_die_type"]+1, true)

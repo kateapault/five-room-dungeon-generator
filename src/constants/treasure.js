@@ -1,7 +1,9 @@
+import { COMMON, UNCOMMON, RARE, VERYRARE, LEGENDARY, CR0TO4, CR5TO10, CR11TO16, CR17PLUS, ALL} from "./constants"
+import { randomlySelectWeightedIndex, getRandInt } from "../services/helpers"
+
 export class Treasure {
-    constructor() {
-        this.individualTreasure = {    
-            "CR0-4": [
+    static individualTreasure = {    
+            CR0TO4: [
                 {
                     "weight": 0.35,
                     "coins": [{"type": "copper", "roll": 5, "die": 6, "multiplier": 1}]
@@ -15,7 +17,7 @@ export class Treasure {
                     "coins": [{"type": "gold", "roll": 3, "die": 6, "multiplier": 1}]
                 }
             ],
-            "CR5-10": [
+            CR5TO10: [
                 {
                     "weight": 0.35,
                     "coins": [{"type": "copper", "roll": 4, "die": 6, "multiplier": 100}]
@@ -32,7 +34,7 @@ export class Treasure {
                     "coins": [{"type": "gold", "roll": 4, "die": 6, "multiplier": 10}]
                 }
             ],
-            "CR11-16": [
+            CR11TO16: [
                 {
                     "weight": 0.35,
                     "coins": [
@@ -51,7 +53,7 @@ export class Treasure {
                     "coins": [{"type": "gold", "roll": 4, "die": 6, "multiplier": 100}]
                 }
             ],
-            "CR17+": [
+            CR17PLUS: [
                 {
                     "weight": 0.35,
                     "coins": [
@@ -70,8 +72,8 @@ export class Treasure {
                 }
             ],
         }
-        this.hoardTreasure = {
-            "CR0-4": {
+    static hoardTreasure = {
+            CR0TO4: {
                 "coins": {
                     "copper": {
                         "roll": 6,
@@ -159,7 +161,7 @@ export class Treasure {
                     },
                 ]
             },
-            "CR5-10": {
+            CR5TO10: {
                 "coins": {
                     "copper": {
                         "roll": 2,
@@ -268,7 +270,7 @@ export class Treasure {
                     },
                 ],
             },
-            "CR11-16": {
+            CR11TO16: {
                 "coins": {
                     "gold": {
                         "roll": 4,
@@ -367,7 +369,7 @@ export class Treasure {
                     },
                 ],
             },
-            "CR17+": {
+            CR17PLUS: {
                 "coins": {
                     "gold": {
                         "roll": 12,
@@ -460,7 +462,7 @@ export class Treasure {
                 ],
             }
         }
-        this.gems = {
+    static gems = {
             "10gp": [
                 "Azurite (opaque mottled deep blue)",
                 "Banded agate (translucent striped brown, blue, white, or red)",
@@ -526,7 +528,7 @@ export class Treasure {
                 "Ruby (transparent clear red to deep crimson)",
             ]
         }
-        this.artObjects = {
+    static artObjects = {
             "25gp": [
                 "Silver ewer",
                 "Carved bone statuette",
@@ -586,7 +588,7 @@ export class Treasure {
                 "Bejeweled ivory drinking horn with gold filigree",
             ]
         }
-        this.magicItems = {
+    static magicItems = {
             "A":[
                 {
                     "weight": .5,
@@ -953,7 +955,7 @@ export class Treasure {
             "G": [],
             "H": [],
             "I": [],
-            "Common": [
+            "common": [
                 {'item': 'Armor of gleaming',
                 'link': 'https://dnd5e.wikidot.com/wondrous-items:armor-of-gleaming'},
                 {'item': 'Bead of nourishment',
@@ -1065,7 +1067,7 @@ export class Treasure {
                 {'item': 'Wand of smiles',
                 'link': 'https://dnd5e.wikidot.com/wondrous-items:wand-of-smiles'}
             ],
-            "Uncommon": [
+            "uncommon": [
                 {'item': 'Adamantine armor',
                 'link': 'https://dnd5e.wikidot.com/wondrous-items:adamantine-armor'},
                 {'item': 'Alchemy jug',
@@ -1277,7 +1279,7 @@ export class Treasure {
                 {'item': 'Winged boots',
                 'link': 'https://dnd5e.wikidot.com/wondrous-items:winged-boots'}
             ],
-            "Rare": [
+            "rare": [
                 {'item': 'Alchemical compendium',
                 'link': 'https://dnd5e.wikidot.com/wondrous-items:alchemical-compendium'},
                 {'item': 'All purpose tool',
@@ -1527,7 +1529,7 @@ export class Treasure {
                 {'item': 'Wings of flying',
                 'link': 'https://dnd5e.wikidot.com/wondrous-items:wings-of-flying'}
             ],
-            "Very Rare": [
+            "very rare": [
                 {'item': 'Absorbing tattoo',
   'link': 'https://dnd5e.wikidot.com/wondrous-items:absorbing-tattoo'},
  {'item': 'All purpose tool',
@@ -1681,7 +1683,7 @@ export class Treasure {
  {'item': 'Weapon +3',
   'link': 'https://dnd5e.wikidot.com/wondrous-items:weapon-1-2-3'}
 ],
-            "Legendary": [
+            "legendary": [
                 {'item': 'Apparatus of kwalish',
   'link': 'https://dnd5e.wikidot.com/wondrous-items:apparatus-of-kwalish'},
  {'item': 'Armor +3',
@@ -1772,5 +1774,24 @@ export class Treasure {
  {'item': 'Whelm', 'link': 'https://dnd5e.wikidot.com/wondrous-items:whelm'}
 ],
         }
+
+
+
+    static generateIndividualTreasure(level=CR0TO4) {
+
+    }
+
+    static generateHoardTreasure(level=CR0TO4) {
+
+    }
+
+    static generateTreasure(level=COMMON, type=ALL, num=1) {
+        let i = 0
+        let items = []
+        while (i < num) {
+            items.push(this.magicItems[level][getRandInt(this.magicItems[level].length)]["item"])
+            i ++
+        }
+        return items
     }
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import './components.css'
+import { SPACER } from '../constants/constants'
 
 type MapSquareProps = {
     room: string,
@@ -10,11 +11,11 @@ type MapSquareProps = {
 
 export default function MapSquare( {room, entrance, selected, onSelection} ) {
     let classNames = `square`
-    room == 'spacer' ? classNames += ' spacer' : classNames += ' room'
+    room == SPACER ? classNames += ' spacer' : classNames += ' room'
     if (selected) classNames += ' selected'
 
     function selectRoom() {
-        if (room == 'spacer') {
+        if (room == SPACER) {
             return
         }
         onSelection(room)

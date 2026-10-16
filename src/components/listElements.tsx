@@ -2,9 +2,9 @@
 
 export function TempTreasureListItem({t, removeTreasure, saveTreasure}) {
     return (<div className="temp-treasure-item">
-        <button onClick={() => removeTreasure(c)}>X</button>
-        <div>{c}</div>
-        <button onClick={() => saveTreasure(c)}>Add to room</button>
+        <button onClick={() => removeTreasure(t)}>X</button>
+        <div>{t}</div>
+        <button onClick={() => saveTreasure(t)}>Add to room</button>
     </div>)
 }
 
