@@ -21,17 +21,9 @@ export default function Page({dungeon}) {
     const [extras, setExtras] = useState<object>(e)
 
     function saveExtra(type: string, value: string) {
-        console.log(`adding ${value} to ${type}`)
         let newExtras: object = {...extras}
-        console.log(extras[selectedRoom][type])
-        console.log(newExtras[selectedRoom][type])
-        console.log([...newExtras[selectedRoom][type], value])
         newExtras[selectedRoom][type] = [...newExtras[selectedRoom][type], value]
-        console.log(newExtras[selectedRoom])
-        console.log(newExtras[selectedRoom][type])
-        console.log(newExtras)
         setExtras(newExtras)
-        console.log(extras)
     }
 
     function deleteExtra(type: string, value: string) {
