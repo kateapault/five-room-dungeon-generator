@@ -1,33 +1,24 @@
 import React from 'react';
 import { useState } from 'react';
 import { generateKeywords } from '../services/generator.ts'
-import { SavedClueListItem } from './listElements.tsx';
+import { SavedClueListItem, SavedTreasureListItem } from './listElements.tsx';
+import { CLUES, TREASURES, NPCS, ENEMIES} from "../constants/constants"
 
-export default function RoomDetails({ contents, extras, deleteClue, removeNpc, removeTreasure }) {
+export default function RoomDetails({ contents, extras, deleteThing, removeNpc, removeTreasure }) {
     // const [keywords, setKeywords] = useState<string[]>([])
     const [showHelpInfo, setShowHelpInfo] = useState(false)
 
     function toggleHelpInfo() {
         setShowHelpInfo(!showHelpInfo)
     }
-
-    // function genKeys() {
-    //     let kws: Array<string> = generateKeywords();
-    //     console.log(kws)
-    //     console.log(`typeof kws = ${typeof(kws)}`)
-    //     setKeywords(kws);
-    // }
     
     function formatKeywords(keywords: Array<string>): string {
         return keywords.join(', ').toLocaleLowerCase()
     }
 
     function formatRoomSize(dimensions: Object): string {
-
         return `A ${dimensions["size"]} room (${dimensions["width"]} x ${dimensions["length"]} blocks | ${dimensions["width"]*5}' x ${dimensions["length"]*5}')`
     }
-
-    console.log(extras)
 
     return(
         <div className="room-details-section">
@@ -61,23 +52,8 @@ export default function RoomDetails({ contents, extras, deleteClue, removeNpc, r
                                         <SavedClueListItem
                                             key={c}
                                             c={c}
-                                            deleteClue={() => deleteClue(c)}
+                                            deleteClue={() => deleteThing(CLUES, c)}
                                         />
-                                    )
-                                })
-                            }
-                        </div> 
-                    : <></>}
-                    { extras["npcs"].length > 0 ? 
-                        <div>
-                            <div>npcs</div>
-                            {
-                                extras["npcs"].map(n => {
-                                    return (
-                                        <div key={n}>
-                                            {n}
-                                            <button onClick={() => removeNpc(n)}>X</button>
-                                        </div>
                                     )
                                 })
                             }
@@ -85,14 +61,15 @@ export default function RoomDetails({ contents, extras, deleteClue, removeNpc, r
                     : <></>}
                     { extras["treasures"].length > 0 ? 
                         <div>
-                            <div>treasures</div>
+                            <div>Treasures</div>
                             {
                                 extras["treasures"].map(t => {
                                     return (
-                                        <div key={t}>
-                                            {t}
-                                            <button onClick={() => removeTreasure(t)}>X</button>
-                                        </div>
+                                        <SavedTreasureListItem 
+                                            key={t}
+                                            t={t}
+                                            deleteTreasure={() => deleteThing(TREASURES, t)}
+                                        />
                                     )
                                 })
                             }

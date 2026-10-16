@@ -20,3 +20,11 @@ export function getRandInt(maxNonInclusive: number, startFromOne: boolean = fals
     }
     return Math.floor(Math.random()*maxNonInclusive)
 }
+
+export function rollDice({dieValue, numRolls, addNum=0, multiplier=1}) {
+    let rolledVal = 0
+    for (let i = 0; i < numRolls; i++) {
+        rolledVal += getRandInt(dieValue+1, true)
+    }
+    return (rolledVal + addNum) * multiplier
+}

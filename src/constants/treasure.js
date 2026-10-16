@@ -1,12 +1,25 @@
-import { COMMON, UNCOMMON, RARE, VERYRARE, LEGENDARY, CR0TO4, CR5TO10, CR11TO16, CR17PLUS, ALL} from "./constants"
-import { randomlySelectWeightedIndex, getRandInt } from "../services/helpers"
+import { COMMON, UNCOMMON, RARE, VERYRARE, LEGENDARY, CR0TO4, CR5TO10, CR11TO16, CR17PLUS, ANY, COINS, GEMS, ART, MAGICITEMS, INDIVIDUAL, HOARD} from "./constants"
+import { randomlySelectWeightedIndex, getRandInt, rollDice } from "../services/helpers"
+
+const GP10 = '10gp'
+const GP50 = '50gp'
+const GP100 = '100gp'
+const GP500 = '500gp'
+const GP1000 = '1000gp'
+const GP5000 = '5000gp'
+
+const GP25 = '25gp'
+const GP250 = '250gp'
+const GP750 = '750gp'
+const GP2500 = '2500gp'
+const GP7500 = '7500gp'
 
 export class Treasure {
-    static individualTreasure = {    
-            CR0TO4: [
+    static individualTreasures = {    
+            [CR0TO4]: [
                 {
                     "weight": 0.35,
-                    "coins": [{"type": "copper", "roll": 5, "die": 6, "multiplier": 1}]
+                    "coins": [{"type": "copper", "roll": 5, "die": 6, "multiplier": 10}]
                 },
                 {
                     "weight": 0.35,
@@ -17,7 +30,7 @@ export class Treasure {
                     "coins": [{"type": "gold", "roll": 3, "die": 6, "multiplier": 1}]
                 }
             ],
-            CR5TO10: [
+            [CR5TO10]: [
                 {
                     "weight": 0.35,
                     "coins": [{"type": "copper", "roll": 4, "die": 6, "multiplier": 100}]
@@ -34,7 +47,7 @@ export class Treasure {
                     "coins": [{"type": "gold", "roll": 4, "die": 6, "multiplier": 10}]
                 }
             ],
-            CR11TO16: [
+            [CR11TO16]: [
                 {
                     "weight": 0.35,
                     "coins": [
@@ -53,7 +66,7 @@ export class Treasure {
                     "coins": [{"type": "gold", "roll": 4, "die": 6, "multiplier": 100}]
                 }
             ],
-            CR17PLUS: [
+            [CR17PLUS]: [
                 {
                     "weight": 0.35,
                     "coins": [
@@ -72,8 +85,10 @@ export class Treasure {
                 }
             ],
         }
-    static hoardTreasure = {
-            CR0TO4: {
+    static hoardTreasures = {
+            [CR0TO4]: {
+                // should probably standardize coins
+                // or possibly delete hoard & individual entirely & just do single type...?
                 "coins": {
                     "copper": {
                         "roll": 6,
@@ -102,21 +117,21 @@ export class Treasure {
                         "roll": 2,
                         "die": 6,
                         "type": "gems",
-                        "table": "10gp",
+                        "table": GP10,
                     },
                     {
                         "weight": 0.34,
                         "roll": 2,
                         "die": 4,
                         "type": "artObjects",
-                        "table": "25gp",
+                        "table": GP25,
                     },
                     {
                         "weight": 0.33,
                         "roll": 2,
                         "die": 6,
                         "type": "gems",
-                        "table": "50gp",
+                        "table": GP50,
                     },
                 ],
                 "magicItems": [
@@ -161,7 +176,7 @@ export class Treasure {
                     },
                 ]
             },
-            CR5TO10: {
+            [CR5TO10]: {
                 "coins": {
                     "copper": {
                         "roll": 2,
@@ -190,28 +205,28 @@ export class Treasure {
                         "roll": 2,
                         "die": 4,
                         "type": "artObjects",
-                        "table": "25gp",
+                        "table": GP25,
                     },
                     {
                         "weight": 0.26,
                         "roll": 3,
                         "die": 6,
                         "type": "gems",
-                        "table": "50gp",
+                        "table": GP50,
                     },
                     {
                         "weight": 0.25,
                         "roll": 3,
                         "die": 6,
                         "type": "gems",
-                        "table": "100gp",
+                        "table": GP100,
                     },
                     {
                         "weight": 0.21,
                         "roll": 2,
                         "die": 4,
                         "type": "artObjects",
-                        "table": "250gp",
+                        "table": GP250,
                     },
                 ],
                 "magicItems":[
@@ -270,7 +285,7 @@ export class Treasure {
                     },
                 ],
             },
-            CR11TO16: {
+            [CR11TO16]: {
                 "coins": {
                     "gold": {
                         "roll": 4,
@@ -289,28 +304,28 @@ export class Treasure {
                         "roll": 2,
                         "die": 4,
                         "type": "artObjects",
-                        "table": "250gp",
+                        "table": GP250,
                     },
                     {
                         "weight": 0.25,
                         "roll": 2,
                         "die": 4,
                         "type": "artObjects",
-                        "table": "750gp",
+                        "table": GP750,
                     },
                     {
                         "weight": 0.22,
                         "roll": 3,
                         "die": 6,
                         "type": "gems",
-                        "table": "500gp",
+                        "table": GP500,
                     },
                     {
                         "weight": 0.23,
                         "roll": 3,
                         "die": 6,
                         "type": "gems",
-                        "table": "1000gp",
+                        "table": GP1000,
                     },
                 ],
                 "magicItems":[
@@ -369,7 +384,7 @@ export class Treasure {
                     },
                 ],
             },
-            CR17PLUS: {
+            [CR17PLUS]: {
                 "coins": {
                     "gold": {
                         "roll": 12,
@@ -388,28 +403,28 @@ export class Treasure {
                         "roll": 3,
                         "die": 6,
                         "type": "gems",
-                        "table": "1000gp",
+                        "table": GP1000,
                     },
                     {
                         "weight": 0.25,
                         "roll": 1,
                         "die": 10,
                         "type": "artObjects",
-                        "table": "2500gp",
+                        "table": GP2500,
                     },
                     {
                         "weight": 0.24,
                         "roll": 1,
                         "die": 4,
                         "type": "artObjects",
-                        "table": "7500gp",
+                        "table": GP7500,
                     },
                     {
                         "weight": 0.24,
                         "roll": 1,
                         "die": 8,
                         "type": "gems",
-                        "table": "5000gp",
+                        "table": GP5000,
                     },
                 ],
                 "magicItems":[
@@ -463,7 +478,7 @@ export class Treasure {
             }
         }
     static gems = {
-            "10gp": [
+            [GP10]: [
                 "Azurite (opaque mottled deep blue)",
                 "Banded agate (translucent striped brown, blue, white, or red)",
                 "Blue quartz (transparent pale blue)",
@@ -477,7 +492,7 @@ export class Treasure {
                 "Tiger eye (translucent brown with golden center)",
                 "Turquoise (opaque light blue-green)",
             ],
-            "50gp": [
+            [GP50]: [
                 "Bloodstone (opaque dark gray with red flecks)",
                 "Carnelian (opaque orange to red-brown)",
                 "Chalcedony (opaque white)",
@@ -491,7 +506,7 @@ export class Treasure {
                 "Star rose quartz (translucent rosy stone with white star-shaped center)",
                 "Zircon (transparent pale blue-green)",
             ],
-            "100gp": [
+            [GP100]: [
                 "Amber (transparent watery gold to rich gold)",
                 "Amethyst (transparent deep purple)",
                 "Chrysoberyl (transparent yellow-green to pale green)",
@@ -503,7 +518,7 @@ export class Treasure {
                 "Spinel (transparent red, red-brown, or deep green)",
                 "Tourmaline (transparent pale green, blue, brown, or red)",
             ],
-            "500gp": [
+            [GP500]: [
                 "Alexandrite (transparent dark green)",
                 "Aquamarine (transparent pale blue-green)",
                 "Black pearl (opaque pure black)",
@@ -511,7 +526,7 @@ export class Treasure {
                 "Peridot (transparent rich olive green)",
                 "Topaz (transparent golden yellow)",
             ],
-            "1000gp": [
+            [GP1000]: [
                 "Black opal (translucent dark green with black mottling and golden flecks)",
                 "Blue sapphire (transparent blue-white to medium blue)",
                 "Emerald (transparent deep bright green)",
@@ -521,7 +536,7 @@ export class Treasure {
                 "Star sapphire (translucent blue sapphire with white star-shaped center)",
                 "Yellow sapphire (transparent fiery yellow or yellow-green)",
             ],
-            "5000gp": [
+            [GP5000]: [
                 "Black sapphire (translucent lustrous black with glowing highlights)",
                 "Diamond (transparent blue-white, canary, pink, brown, or blue)",
                 "Jacinth (transparent fiery orange)",
@@ -529,7 +544,7 @@ export class Treasure {
             ]
         }
     static artObjects = {
-            "25gp": [
+            [GP25]: [
                 "Silver ewer",
                 "Carved bone statuette",
                 "Small gold bracelet",
@@ -541,7 +556,7 @@ export class Treasure {
                 "Embroidered silk handkerchief",
                 "Gold locket with a painted portrait inside",
             ],
-            "250gp": [
+            [GP250]: [
                 "Gold ring set with bloodstones",
                 "Carved ivory statuette",
                 "Large gold bracelet",
@@ -553,7 +568,7 @@ export class Treasure {
                 "Box of turquoise animal figurines",
                 "Gold bird cage with electrum filigree",
             ],
-            "750gp": [
+            [GP750]: [
                 "Silver chalice set with moonstones",
                 "Silver-plated steellongsword with jet set in hilt",
                 "Carved harp of exotic wood with ivory inlay and zircon gems",
@@ -565,7 +580,7 @@ export class Treasure {
                 "Obsidian statuette with gold fittings and inlay",
                 "Painted gold war mask",
             ],
-            "2500gp": [
+            [GP2500]: [
                 "Fine gold chain set with a fire opal",
                 "Old masterpiece painting",
                 "Embroidered silk and velvet mantle set with numerous moonstones",
@@ -577,7 +592,7 @@ export class Treasure {
                 "Eye patch with a mock eye set in blue sapphire and moonstone",
                 "A necklace string of small pink pearls",
             ],
-            "7500gp": [
+            [GP7500]: [
                 "Jeweled gold crown",
                 "Jeweled platinum ring",
                 "Small gold statuette set with rubies",
@@ -955,7 +970,7 @@ export class Treasure {
             "G": [],
             "H": [],
             "I": [],
-            "common": [
+            [COMMON]: [
                 {'item': 'Armor of gleaming',
                 'link': 'https://dnd5e.wikidot.com/wondrous-items:armor-of-gleaming'},
                 {'item': 'Bead of nourishment',
@@ -1067,7 +1082,7 @@ export class Treasure {
                 {'item': 'Wand of smiles',
                 'link': 'https://dnd5e.wikidot.com/wondrous-items:wand-of-smiles'}
             ],
-            "uncommon": [
+            [UNCOMMON]: [
                 {'item': 'Adamantine armor',
                 'link': 'https://dnd5e.wikidot.com/wondrous-items:adamantine-armor'},
                 {'item': 'Alchemy jug',
@@ -1279,7 +1294,7 @@ export class Treasure {
                 {'item': 'Winged boots',
                 'link': 'https://dnd5e.wikidot.com/wondrous-items:winged-boots'}
             ],
-            "rare": [
+            [RARE]: [
                 {'item': 'Alchemical compendium',
                 'link': 'https://dnd5e.wikidot.com/wondrous-items:alchemical-compendium'},
                 {'item': 'All purpose tool',
@@ -1529,7 +1544,7 @@ export class Treasure {
                 {'item': 'Wings of flying',
                 'link': 'https://dnd5e.wikidot.com/wondrous-items:wings-of-flying'}
             ],
-            "very rare": [
+            [VERYRARE]: [
                 {'item': 'Absorbing tattoo',
   'link': 'https://dnd5e.wikidot.com/wondrous-items:absorbing-tattoo'},
  {'item': 'All purpose tool',
@@ -1683,7 +1698,7 @@ export class Treasure {
  {'item': 'Weapon +3',
   'link': 'https://dnd5e.wikidot.com/wondrous-items:weapon-1-2-3'}
 ],
-            "legendary": [
+            [LEGENDARY]: [
                 {'item': 'Apparatus of kwalish',
   'link': 'https://dnd5e.wikidot.com/wondrous-items:apparatus-of-kwalish'},
  {'item': 'Armor +3',
@@ -1773,7 +1788,7 @@ export class Treasure {
   'link': 'https://dnd5e.wikidot.com/wondrous-items:well-of-many-worlds'},
  {'item': 'Whelm', 'link': 'https://dnd5e.wikidot.com/wondrous-items:whelm'}
 ],
-        }
+    }
 
 
 
@@ -1785,11 +1800,71 @@ export class Treasure {
 
     }
 
-    static generateTreasure(level=COMMON, type=ALL, num=1) {
-        let i = 0
+    static #selectCoins(coinList) {
+        let weights = coinList.map(cl => cl.weight)
+        let coinRolls = coinList[randomlySelectWeightedIndex(weights)]["coins"]
+        // type roll die multiplier
+        let rolledVal = rollDice({dieValue: coinRolls[0]["die"], numRolls: coinRolls[0]["roll"], multiplier: coinRolls[0]["multiplier"]})
+
+        let coins = `${rolledVal} ${coinRolls[0]["type"]}`
+
+        let i = 1
+        while (i < coinRolls.length) {
+            coins += `, ${rollDice(coinRolls[0]["die"], coinRolls[0]["roll"], multiplier=coinRolls[0]["multiplier"])} ${coinRolls[0]["type"]}`
+        }
+        return coins
+    }
+
+    static #selectUnweighted(list) {
+        return list[getRandInt(list.length)]
+    }
+
+    static generateTreasure({level=COMMON, type=COINS, num=1}) {
+        if (type == ANY) {
+            type = [COINS, GEMS, ART, MAGICITEMS][getRandInt(4)]
+        }
+
+        let selectTreasureFunc = type == COINS ? this.#selectCoins : this.#selectUnweighted
+
+        let listSelection = {
+            [COINS]: {
+                [COMMON]: this.individualTreasures[CR0TO4],
+                [UNCOMMON]: this.individualTreasures[CR0TO4].map(t => {
+                            t.multiplier = t.multiplier * 5
+                            return t
+                        }),
+                [RARE]: this.individualTreasures[CR5TO10],
+                [VERYRARE]: this.individualTreasures[CR11TO16],
+                [LEGENDARY]: this.individualTreasures[CR17PLUS],
+            },
+            [GEMS]: {
+                [COMMON]: this.gems[GP10],
+                [UNCOMMON]: this.gems[GP50],
+                [RARE]: [...this.gems[GP100], ...this.gems[GP500]],
+                [VERYRARE]: this.gems[GP1000],
+                [LEGENDARY]: this.gems[GP5000],
+            },
+            [ART]: {
+                [COMMON]: this.artObjects[GP25],
+                [UNCOMMON]: this.artObjects[GP250],
+                [RARE]: this.artObjects[GP750],
+                [VERYRARE]: this.artObjects[GP2500],
+                [LEGENDARY]: this.artObjects[GP7500],
+            },
+            [MAGICITEMS]: {
+                [COMMON]: this.magicItems[COMMON].map(mi => mi["item"]),
+                [UNCOMMON]: this.magicItems[UNCOMMON].map(mi => mi["item"]),
+                [RARE]: this.magicItems[RARE].map(mi => mi["item"]),
+                [VERYRARE]: this.magicItems[VERYRARE].map(mi => mi["item"]),
+                [LEGENDARY]: this.magicItems[LEGENDARY].map(mi => mi["item"]),
+            }
+        }
+
+        let list = listSelection[type][level]
         let items = []
+        let i = 0
         while (i < num) {
-            items.push(this.magicItems[level][getRandInt(this.magicItems[level].length)]["item"])
+            items.push(selectTreasureFunc(list))
             i ++
         }
         return items

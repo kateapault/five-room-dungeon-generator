@@ -14,7 +14,6 @@ function App() {
     // setButtonClicked(true)
   }
   console.log(generatedDungeon)
-  // console.log('loadeddd')
 
   return (
     <>

@@ -6,38 +6,38 @@ import DungeonMap from "./map";
 import RoomDetails from "./roomDetails.js";
 import { generateKeywords } from "../services/generator.ts"
 import GenerateMore from "./generateMore.tsx";
+import { CLUES, TREASURES, NPCS, ENEMIES } from "../constants/constants"
 
 
 export default function Page({dungeon}) {
     const [selectedRoom, setSelectedRoom] = useState(dungeon["layout"]["entrance"])
     let e = {
-        "A": {"clues": [], "treasures": [], "npcs": [], "enemies": []},
-        "B": {"clues": [], "treasures": [], "npcs": [], "enemies": []},
-        "C": {"clues": [], "treasures": [], "npcs": [], "enemies": []},
-        "D": {"clues": [], "treasures": [], "npcs": [], "enemies": []},
-        "E": {"clues": [], "treasures": [], "npcs": [], "enemies": []},
+        "A": {[CLUES]: [], [TREASURES]: [], [NPCS]: [], [ENEMIES]: []},
+        "B": {[CLUES]: [], [TREASURES]: [], [NPCS]: [], [ENEMIES]: []},
+        "C": {[CLUES]: [], [TREASURES]: [], [NPCS]: [], [ENEMIES]: []},
+        "D": {[CLUES]: [], [TREASURES]: [], [NPCS]: [], [ENEMIES]: []},
+        "E": {[CLUES]: [], [TREASURES]: [], [NPCS]: [], [ENEMIES]: []},
     }
     const [extras, setExtras] = useState<object>(e)
 
-    function saveClue(clue: string) {
-        let newExtras:object = {...extras}
-        newExtras[selectedRoom]["clues"] = [...newExtras[selectedRoom]["clues"], clue]
+    function saveExtra(type: string, value: string) {
+        console.log(`adding ${value} to ${type}`)
+        let newExtras: object = {...extras}
+        console.log(extras[selectedRoom][type])
+        console.log(newExtras[selectedRoom][type])
+        console.log([...newExtras[selectedRoom][type], value])
+        newExtras[selectedRoom][type] = [...newExtras[selectedRoom][type], value]
+        console.log(newExtras[selectedRoom])
+        console.log(newExtras[selectedRoom][type])
+        console.log(newExtras)
         setExtras(newExtras)
         console.log(extras)
     }
 
-    function deleteClue(clue: string) {
+    function deleteExtra(type: string, value: string) {
         let newExtras:object = {...extras}
-        newExtras[selectedRoom]["clues"] = newExtras[selectedRoom]["clues"].filter(e => e != clue)
+        newExtras[selectedRoom][type] = newExtras[selectedRoom][type].filter(e => e != value)
         setExtras(newExtras)
-    }
-
-    function saveTreasure() {
-        return
-    }
-
-    function deleteTreasure() {
-        return
     }
 
     return (
@@ -51,10 +51,10 @@ export default function Page({dungeon}) {
             <RoomDetails 
                 contents={dungeon["rooms"][selectedRoom]}
                 extras={extras[selectedRoom]}
-                deleteClue={deleteClue}
+                deleteThing={deleteExtra}
             />
             <GenerateMore 
-                saveClue={saveClue}
+                saveThing={saveExtra}
             />
         </div>
     )

@@ -7,12 +7,10 @@ import { randomlySelectWeightedIndex, getRandInt } from "./helpers"
 
 export function generateClues(num: number = 1): Array<string> {
     let resultClues = [clues[getRandInt(clues.length)]]
-    console.log(resultClues)
     if (num > 1) {
         let i = 1
         while (i < num) {
             let nextClue = clues[getRandInt(clues.length)]
-            console.log(nextClue)
             if (nextClue in resultClues) {
                 continue
             }
@@ -20,7 +18,6 @@ export function generateClues(num: number = 1): Array<string> {
             i++
         }
     }
-    console.log(resultClues)
     return [...resultClues]
 }
 
@@ -91,6 +88,5 @@ export function generateDungeon(): Object {
         }
     })
     dungeon["rooms"] = rooms
-    // console.log(dungeon)
     return dungeon
 }
