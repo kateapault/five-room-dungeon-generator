@@ -16,7 +16,7 @@ export default function DungeonMap({ layout, selectedRoom, setSelectedRoom }) {
     return (
         <div className="dungeon-map">
             {
-                layout.pattern.map((row: Array<String>) => {
+                layout.pattern.map((row: Array<string>) => {
                     return ( <div key={ind} className="map-row"> 
                         {row.map(col => {
                         ind += 1

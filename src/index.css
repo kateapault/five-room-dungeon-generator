@@ -10,12 +10,15 @@
   --accent-border: rgba(61, 107, 79, 0.45);
   --selected: #dce8df;
   --radius: 7px;
+  --moss: #284a0c;
 
   --sans: 'IBM Plex Sans', system-ui, 'Segoe UI', Roboto, sans-serif;
   --heading: 'Source Serif 4', 'Iowan Old Style', Palatino, serif;
   --mono: 'IBM Plex Mono', ui-monospace, Consolas, monospace;
+  --medieval: MedievalSharp;
+  --imfell: IM Fell English;
 
-  font: 16px/150% var(--sans);
+  font: 16px/150% var(--imfell);
   letter-spacing: 0.01em;
   color-scheme: light dark;
   color: var(--text);
@@ -87,7 +90,7 @@ select:focus-visible {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  padding: 7px 12px;
+  padding: 8px 12px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--surface);
@@ -127,6 +130,10 @@ select:focus-visible {
   background: transparent;
 }
 
+.delete {
+  font-family: var(--mono);
+}
+
 .select {
   padding: 7px 10px;
   border: 1px solid var(--border);
@@ -151,9 +158,13 @@ select:focus-visible {
 
 .list-row {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 8px;
   width: 100%;
   padding: 6px 0;
   color: var(--text-h);
+}
+
+select:hover {  
+  background: var(--accent-bg);
 }

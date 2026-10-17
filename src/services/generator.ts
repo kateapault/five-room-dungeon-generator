@@ -25,13 +25,12 @@ export function generateClues(num: number = 1): Array<string> {
 // num must be >=1 but this isn't a public-facing method so I'm not adding any rails on this
 export function generateKeywords(num: number = 3, useList: number|null = null): Array<string> {
     let list: Array<string>
-    switch (useList) {
-        case 1:
-            list = tsat1_keywords
-        case 2:
-            list = tsat2_keywords
-        default:
-            list = [...tsat1_keywords, ...tsat2_keywords]
+    if (useList == 1) {
+        list = tsat1_keywords
+    } else if (useList == 2) {
+        list = tsat2_keywords
+    } else {
+        list = [...tsat1_keywords, ...tsat2_keywords]
     }
     let keywords: Array<string> = [list[getRandInt(list.length)]]
     if (num > 1) {

@@ -23,7 +23,6 @@ export default function MapSquare( {room, entrance, selected, onSelection}: MapS
     
     return(
         <div className={classNames} onClick={selectRoom}>
-            {room != SPACER ? <span className="room-letter">{room}</span> : null}
             {entrance ? <span className="entrance-label">Entrance</span> : null}
         </div>
     )

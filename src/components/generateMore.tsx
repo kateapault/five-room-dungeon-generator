@@ -5,6 +5,7 @@ import { Treasure } from "../constants/treasure"
 import { COMMON, UNCOMMON, RARE, VERYRARE, LEGENDARY, CR0TO4, CR5TO10, CR11TO16, CR17PLUS, ANY, COINS, ART, GEMS, MAGICITEMS, CLUES, TREASURES, NPCS, ENEMIES } from "../constants/constants"
 
 export default function GenerateMore({ saveThing }) {
+    const [selectedTab, setSelectedTab] = useState<string>(CLUES)
     const [clues, setClues] = useState<string[]>([])
     const [clueParams, setClueParams] = useState(2)
     const [treasures, setTreasures] = useState<string[]>([])
@@ -37,11 +38,19 @@ export default function GenerateMore({ saveThing }) {
     function handleGenerateThing(type: string) {
         switch (type) {
             case CLUES: {
-                setClues(generateClues(clueParams))
+                setClues([...clues,...generateClues(clueParams)])
                 return
             }
             case TREASURES: {
-                setTreasures(Treasure.generateTreasure(treasureParams))
+                setTreasures([...treasures, ...Treasure.generateTreasure(treasureParams)])
+                return
+            }
+            case NPCS: {
+                console.log("coming soon")
+                return
+            }
+            case ENEMIES: {
+                console.log("coming soon")
                 return
             }
         }
@@ -65,10 +74,33 @@ export default function GenerateMore({ saveThing }) {
         handleRemoveThing(type, value)
     }
 
-    return(
-        <div className="generate-more-block">
-            <div className="panel generator-column">
-                <div className="label">Clues</div>
+    function GenerationTab({type}) {
+        return (
+            <div 
+                className={selectedTab == type ? "tab selected-tab" : "tab"}
+                onClick={() => setSelectedTab(type)}
+            >
+                {type == NPCS ? type.slice(0,3).toUpperCase() + type.charAt(3): type.charAt(0).toUpperCase() + type.slice(1)}
+            </div>
+        )
+    }
+
+    function CluesGeneration() {
+        return (
+            <div className="generator-section">
+                <div className="generator-controls">
+                    <button className="btn btn-primary generate-btn" onClick={() => handleGenerateThing(CLUES)}>GENERATE CLUES</button>
+                    <select
+                        className="select"
+                        value={clueParams}
+                        onChange={e => setClueParams(+e.target.value)}
+                    >
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
                 <div className="generator-results">{
                     clues.map(c => {
                         return(
@@ -81,35 +113,15 @@ export default function GenerateMore({ saveThing }) {
                         )
                     })
                 }</div>
-                <div className="generator-controls">
-                    <select
-                        className="select"
-                        value={clueParams}
-                        onChange={e => setClueParams(+e.target.value)}
-                    >
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
-                    <button className="btn" onClick={() => handleGenerateThing(CLUES)}>generate clues</button>
-                </div>
             </div>
-            <div className="panel generator-column">
-                <div className="label">Treasure</div>
-                <div className="generator-results">
-                    {
-                        treasures.map(t => {return(
-                            <TempTreasureListItem 
-                                key={t}
-                                t={t}
-                                removeTreasure={()=>handleRemoveThing(TREASURES, t)}
-                                saveTreasure={()=> handleSaveThing(TREASURES, t)}
-                            />
-                        )})
-                    }
-                </div>
+        )
+    }
+
+    function TreasuresGeneration() {
+        return(
+            <div className="generator-section">
                 <div className="generator-controls">
+                    <button className="btn btn-primary generate-btn" onClick={() => handleGenerateThing(TREASURES)}>GENERATE TREASURE</button>
                     <select
                         className="select"
                         value={treasureParams['num']}
@@ -125,7 +137,7 @@ export default function GenerateMore({ saveThing }) {
                         value={treasureParams['type']}
                         onChange={e => updateTreasureType(e.target.value)}
                     >
-                        <option value={ANY}>Any</option>
+                        <option value={ANY}>Any Type</option>
                         <option value={COINS}>Coins</option>
                         <option value={GEMS}>Gems</option>
                         <option value={ART}>Art Objects</option>
@@ -142,15 +154,84 @@ export default function GenerateMore({ saveThing }) {
                         <option value={VERYRARE}>Very Rare</option>
                         <option value={LEGENDARY}>Legendary</option>
                     </select>
-                    <button className="btn" onClick={() => handleGenerateThing(TREASURES)}>generate treasure</button>
+                </div>
+                <div className="generator-results">
+                    {
+                        treasures.map(t => {return(
+                            <TempTreasureListItem 
+                                key={t}
+                                t={t}
+                                removeTreasure={()=>handleRemoveThing(TREASURES, t)}
+                                saveTreasure={()=> handleSaveThing(TREASURES, t)}
+                            />
+                        )})
+                    }
                 </div>
             </div>
-            {/* <div>
-                <button>generate combat encounter</button>
+        )
+    }
+
+    function NpcsGeneration() {
+        return(
+            <div className="generator-section">
+                <div className="generator-controls">
+                    <button className="btn btn-primary generate-btn" onClick={() => handleGenerateThing(NPCS)}>GENERATE NPCS</button>
+                </div>
+                <div className="generator-results">
+                        coming soon!
+                </div>
+            </div>
+        )
+    }
+
+    function EnemiesGeneration() {
+        return(
+            <div className="generator-section">
+                <div className="generator-controls">
+                    <button className="btn btn-primary generate-btn" onClick={() => handleGenerateThing(ENEMIES)}>GENERATE ENEMIES</button>
+                </div>
+                <div className="generator-results">
+                        coming soon!
+                </div>
+            </div>
+        )
+    }
+
+    function displaySelectedGenerator(type) {
+        switch (type) {
+            case CLUES: {
+                return <CluesGeneration />
+            }
+            case TREASURES: {
+                return <TreasuresGeneration />
+            }
+            case NPCS: {
+                return <NpcsGeneration />
+            }
+            case ENEMIES: {
+                return <EnemiesGeneration />
+            }
+        }
+    }
+
+    return(
+        <div className="generate-more-block panel">
+            <div className="generate-more-block-title">
+                Add Room Elements
+            </div>
+            <div className="tab-bar">
+                {
+                    [CLUES, TREASURES, NPCS, ENEMIES].map(t => {
+                        return <GenerationTab 
+                            key={t}
+                            type={t}
+                        />
+                    })
+                }
             </div>
             <div>
-                <button>generate NPC</button>
-            </div> */}
+                {displaySelectedGenerator(selectedTab)}
+            </div>
         </div>
     )
 }
