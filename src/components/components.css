@@ -296,3 +296,81 @@
   mask-position: center;
   /* margin-right: 4px; */
 }
+
+.printout {
+  font-family: var(--imfell);
+  font-size: 12pt;
+  color: black;
+  background-color: white;
+  padding: 16px;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  pointer-events: none;
+  opacity: 0.001;
+}
+
+.printout-title {
+  font-size: 20pt;
+}
+
+.printout-square {
+  background-color: white;
+  border: 2px solid black;
+  color: black;
+}
+
+.printout-room {
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+  margin-top: 8px;
+  break-inside: avoid;
+  page-break-inside: avoid; 
+}
+
+.printout-room-header {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.printout-room-label {
+  font-size: 16pt;
+}
+
+.printout-room-dimensions {
+  font-family: var(--mono);
+}
+.printout-room-content {
+  font-weight: bold;
+  margin-top: 4px;
+}
+
+.printout-room-keywords {
+  /* border-bottom: 1px solid black; */
+}
+
+.printout-room-extras {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.printout-list {
+  width: 50%;
+  margin-top: 4px;
+  margin-bottom: 2px;
+}
+
+.printout-list-label {
+  font-family: var(--mono);
+  font-weight: bold;
+}
+
+.printout-list-item {
+  margin-left: 2px;
+}
+
+.printout-bullet {
+  filter: grayscale(1)
+}
