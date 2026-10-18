@@ -2,7 +2,9 @@ import { useState } from "react";
 import { generateClues } from "../services/generator";
 import { TempClueListItem, TempTreasureListItem } from "./listElements";
 import { Treasure } from "../constants/treasure"
-import { COMMON, UNCOMMON, RARE, VERYRARE, LEGENDARY, CR0TO4, CR5TO10, CR11TO16, CR17PLUS, ANY, COINS, ART, GEMS, MAGICITEMS, CLUES, TREASURES, NPCS, ENEMIES } from "../constants/constants"
+import { COMMON, UNCOMMON, RARE, VERYRARE, LEGENDARY,
+    // CR0TO4, CR5TO10, CR11TO16, CR17PLUS, 
+    ANY, COINS, ART, GEMS, MAGICITEMS, CLUES, TREASURES, NPCS, ENEMIES } from "../constants/constants"
 
 export default function GenerateMore({ saveThing }) {
     const [selectedTab, setSelectedTab] = useState<string>(CLUES)

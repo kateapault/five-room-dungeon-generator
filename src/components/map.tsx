@@ -1,4 +1,3 @@
-import React from "react";
 import MapSquare from "./mapSquare";
 import './components.css'
 import { SPACER } from '../constants/constants'

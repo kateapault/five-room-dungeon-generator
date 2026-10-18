@@ -1,5 +1,3 @@
-import { COINS } from "../constants/constants"
-
 export function TempTreasureListItem({t, removeTreasure, saveTreasure}) {
     return (<div className="list-row temp-treasure-item">
         <button className="btn btn-icon delete" onClick={removeTreasure}>X</button>

@@ -1,4 +1,3 @@
-import React from "react";
 import './components.css'
 import { SPACER } from '../constants/constants'
 

@@ -1,5 +1,3 @@
-import React from 'react';
-import { useState } from 'react';
 import { SavedClueListItem, SavedTreasureListItem } from './listElements.tsx';
 import { CLUES, TREASURES } from "../constants/constants"
 
