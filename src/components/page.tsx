@@ -31,7 +31,13 @@ export default function Page({dungeon}) {
 
     return (
         <div className="page">
-            <div className="dungeon-title">{dungeon["title"]}</div>
+            <div className="dungeon-title">
+                <button className="btn download-btn">
+                    <div className="download-icon"></div>
+                    Download
+                </button>
+                {dungeon["title"]}
+            </div>
             <DungeonMap 
                 layout={dungeon["layout"]} 
                 selectedRoom={selectedRoom} 
