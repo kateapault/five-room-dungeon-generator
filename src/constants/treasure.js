@@ -1804,7 +1804,6 @@ export class Treasure {
         let weights = coinList.map(cl => cl.weight)
         let coinRolls = coinList[randomlySelectWeightedIndex(weights)]["coins"]
         // type roll die multiplier
-        console.log(coinRolls)
         let rolledVal = rollDice({dieValue: coinRolls[0]["die"], numRolls: coinRolls[0]["roll"], multiplier: coinRolls[0]["multiplier"]})
 
         let coins = `${rolledVal} ${coinRolls[0]["type"]}`
