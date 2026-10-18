@@ -5,13 +5,13 @@ import { roomContents, dungeonPurpose, roomSizes } from "../constants/dungeonAsp
 import { clues } from "../constants/clues"
 import { randomlySelectWeightedIndex, getRandInt } from "./helpers"
 
-export function generateClues(num: number = 1): Array<string> {
+export function generateClues(num: number = 1, savedClues: Array<string>): Array<string> {
     let resultClues = [clues[getRandInt(clues.length)]]
     if (num > 1) {
         let i = 1
         while (i < num) {
             let nextClue = clues[getRandInt(clues.length)]
-            if (nextClue in resultClues) {
+            if (resultClues.includes(nextClue) || savedClues.includes(nextClue)) {
                 continue
             }
             resultClues.push(nextClue)

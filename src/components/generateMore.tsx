@@ -38,13 +38,14 @@ export default function GenerateMore({ saveThing }) {
     }
 
     function handleGenerateThing(type: string) {
+        console.log(treasures)
         switch (type) {
             case CLUES: {
-                setClues([...clues,...generateClues(clueParams)])
+                setClues([...clues,...generateClues(clueParams, clues)])
                 return
             }
             case TREASURES: {
-                setTreasures([...treasures, ...Treasure.generateTreasure(treasureParams)])
+                setTreasures([...treasures, ...Treasure.generateTreasure({...treasureParams, treasures: treasures})])
                 return
             }
             case NPCS: {

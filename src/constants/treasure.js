@@ -1821,8 +1821,7 @@ export class Treasure {
         return list[getRandInt(list.length)]
     }
 
-    static generateTreasure({level=COMMON, type=COINS, num=1}) {
-
+    static generateTreasure({level=COMMON, type=COINS, num=1, treasures}) {
         let listSelection = {
             [COINS]: {
                 [COMMON]: this.individualTreasures[CR0TO4],
@@ -1867,7 +1866,11 @@ export class Treasure {
 
             let selectTreasureFunc = type == COINS ? this.#selectCoins : this.#selectUnweighted
             let list = listSelection[type][level]
-            items.push(selectTreasureFunc(list))
+            let item = selectTreasureFunc(list)
+            if (items.includes(item) || treasures.includes(item)) {
+                continue
+            }
+            items.push(item)
             i ++
         }
         return items
