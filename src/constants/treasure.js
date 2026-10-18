@@ -1823,11 +1823,6 @@ export class Treasure {
     }
 
     static generateTreasure({level=COMMON, type=COINS, num=1}) {
-        if (type == ANY) {
-            type = [COINS, GEMS, ART, MAGICITEMS][getRandInt(4)]
-        }
-
-        let selectTreasureFunc = type == COINS ? this.#selectCoins : this.#selectUnweighted
 
         let listSelection = {
             [COINS]: {
@@ -1863,10 +1858,16 @@ export class Treasure {
             }
         }
 
-        let list = listSelection[type][level]
+        let randomizeType = type == ANY
         let items = []
         let i = 0
         while (i < num) {
+            if (randomizeType) {
+                type = [COINS, GEMS, ART, MAGICITEMS][getRandInt(4)]
+            }
+
+            let selectTreasureFunc = type == COINS ? this.#selectCoins : this.#selectUnweighted
+            let list = listSelection[type][level]
             items.push(selectTreasureFunc(list))
             i ++
         }
