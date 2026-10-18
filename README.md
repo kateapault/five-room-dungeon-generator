@@ -1,5 +1,9 @@
+# [Try it out!](https://fiveroom.katemonster.cc/)
+
 # Five-Room Dungeon Generator
-An interactive five room dungeon generator. Produces a randomly generated dungeon layout with keywords for each room. Currently system agnostic; planned expansions will be D&D based but entirely optional.
+An interactive five room dungeon generator. Produces a randomly generated dungeon layout with keywords for each room. Base dungeon generation and optional clues are system agnostic; optional treasure is from D&D.
+
+<img width="1172" height="714" alt="Screenshot 2026-10-18 at 12 28 43 AM" src="https://github.com/user-attachments/assets/3d1c0299-8d72-4901-9141-4bf22bb0491b" />
 
 ## Made with
 - vanilla React. This is meant to be lightweight so data is stored in objects to avoid the need for additional layers.
@@ -9,9 +13,11 @@ An interactive five room dungeon generator. Produces a randomly generated dungeo
 - [The Solo Adventurer's Toolbox](https://www.dmsguild.com/en/product/252355/the-solo-adventurer-s-toolbox)
 - [The Solo Adventurer's Toolbox Part Two](https://www.dmsguild.com/en/product/348555/the-solo-adventurer-s-toolbox-part-two-the-toolbox-expanded)
 - [Perchance.org's random adjective generator](https://perchance.org/adjective)
+- Dungeon Master's Guide (5e)
+- Xanathar's Guide to Everything
+- Tasha's Cauldron of Everything
 
 ### Planned expansions (eventually, probably)
 - export the dungeon layout + contents as PDF
-- additional optional generators to add NPCs, treasure, combat encounters, and clues to a room
+- additional optional generators for NPCs and combat encounters
 - regenerate room sizes & keywords
-- remove added NPCs, treasure, combat encounters, clues from a room
