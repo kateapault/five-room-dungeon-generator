@@ -1,7 +1,7 @@
 # [Try it out!](https://fiveroom.katemonster.cc/)
 
 # Five-Room Dungeon Generator
-An interactive five room dungeon generator. Produces a randomly generated dungeon layout with keywords for each room. Base dungeon generation and optional clues are system agnostic; optional treasure is from D&D.
+An interactive five room dungeon generator. Produces a randomly generated dungeon layout with keywords for each room. Base dungeon generation and optional clues are system agnostic; optional treasure is from D&D. Dungeon can be downloaded as a terribly formatted PDF.
 
 <img width="1172" height="714" alt="Screenshot 2026-10-18 at 12 28 43 AM" src="https://github.com/user-attachments/assets/3d1c0299-8d72-4901-9141-4bf22bb0491b" />
 
@@ -18,6 +18,6 @@ An interactive five room dungeon generator. Produces a randomly generated dungeo
 - Tasha's Cauldron of Everything
 
 ### Planned expansions (eventually, probably)
-- export the dungeon layout + contents as PDF
+- make the PDF not look like wet trash
 - additional optional generators for NPCs and combat encounters
 - regenerate room sizes & keywords
