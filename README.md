@@ -1,5 +1,4 @@
 # [Try it out!](https://fiveroom.katemonster.cc/)
-
 # Five-Room Dungeon Generator
 An interactive five room dungeon generator. Produces a randomly generated dungeon layout with keywords for each room. Base dungeon generation and optional clues are system agnostic; optional treasure is from D&D. Dungeon can be downloaded as a terribly formatted PDF.
 
@@ -7,6 +6,10 @@ An interactive five room dungeon generator. Produces a randomly generated dungeo
 
 ## Made with
 - vanilla React. This is meant to be lightweight so data is stored in objects to avoid the need for additional layers.
+- organic, locally sourced, farm-to-table, handwritten functional code. AI helped with css styling but the functionality is all me. 
+- 72 hours. apart from tearing my hair out over jsPDF formatting, this was all done in basically two days. 
+
+This codebase is not meant to showcase TypeScript best practices, particularly efficient algorithms, or my best work. This is a silly little site so I don't have to roll up a bunch of things with pen and paper. 乁(´～｀)ㄏ 
 
 ## Data Sources:
 - [Shielddice Studio's Five Room Dungeon Generator](https://www.reddit.com/r/DnD/comments/oestw3/oc_d6_five_room_dungeon_generator_a_tool_for/#lightbox)

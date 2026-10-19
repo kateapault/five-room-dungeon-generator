@@ -18,6 +18,8 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text);
+  display: flex;
+  flex-direction: column;
 }
 
 .main {
@@ -33,4 +35,19 @@
   padding: 14px 28px;
   font-family: var(--mono);
   font-size: 16px;
+}
+
+
+.top-bar-kicker a {
+  text-align: right;
+  font-family: var(--imfell);
+  color: var(--text);
+  font-size: 10px;
+  margin-bottom: 4px;
+  text-decoration: none;
+}
+
+.top-bar-kicker a:visited {
+  color: var(--text);
+  text-decoration: none;
 }

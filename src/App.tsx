@@ -15,7 +15,10 @@ function App() {
     <>
       <div className="top-bar">
         Five Room Dungeon Generator
-        <span className="top-bar-kicker">roll a five-room crawl</span>
+        <span className="top-bar-kicker">
+          roll a five-room crawl
+          <a href="https://github.com/kateapault/five-room-dungeon-generator">source code</a>
+        </span>
       </div>
       <div className="main">
         {
