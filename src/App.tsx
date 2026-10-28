@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import Page from './components/page'
 import { generateDungeon } from "./services/generator.ts"
+import { Analytics } from '@vercel/analytics/react'
 
 function App() {
   const [generatedDungeon, setGeneratedDungeon] = useState({})
@@ -28,6 +29,7 @@ function App() {
           <button className="btn btn-primary generate" onClick={() => handleClick()}>Generate a dungeon</button>
         }
       </div>
+      <Analytics />
     </>
   )
 }
